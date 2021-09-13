@@ -9,29 +9,34 @@ public class Player_Movement : MonoBehaviour
 
     private Vector3 m_movement; //Variable to store the calculated Movemen Value
     private Rigidbody m_playerRigidBody; //RigidBody Component of the Player
-    private Transform m_playerTransform; //Transform Component of the Player
 
     private void Awake()
     {
-        //Initialize these on Awake to avoid null reference conflicts (if any occurs)
+        //Initialize it on Awake to avoid null reference conflicts (if any occurs)
         m_playerRigidBody = this.GetComponent<Rigidbody>();
-        m_playerTransform = this.transform;
     }
 
     private void Start()
     {
+        m_sensitivity = PlayerPrefs.GetInt("Slider Sensitivity");
+
         //Set the max velocity at which the ball can rotate
         m_playerRigidBody.maxAngularVelocity = m_maxAngularVelocity;
     }
 
     private void Update()
     {
-        //Get Input
-        var horizontalMovement = Input.GetAxis("Horizontal");
-        var verticalMovement = Input.GetAxis("Vertical");
+        if (Game_Manager._gameManager._gamePlaying && !Game_Manager._gameManager._isGameOver)
+        {/*
+            //Get Input
+            var horizontalMovement = Input.GetAxis("Horizontal");
+            var verticalMovement = Input.GetAxis("Vertical");
 
-        //Calculate Movement
-        m_movement = ((verticalMovement * Vector3.forward) + (horizontalMovement * Vector3.right)).normalized;
+            //Calculate Movement
+            m_movement = ((verticalMovement * Vector3.forward) + (horizontalMovement * Vector3.right)).normalized;*/
+
+            m_movement = new Vector3(Input.acceleration.x, 0f, Input.acceleration.y);
+        }   
     }
 
     private void FixedUpdate()
