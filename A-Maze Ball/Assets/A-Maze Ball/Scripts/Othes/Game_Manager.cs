@@ -57,7 +57,7 @@ public class Game_Manager : MonoBehaviour
 
     public int PenaltyPoints()
     {
-        return _penalties * 10;
+        return _penalties * 30;
     }
 
     public int FinalScore()
@@ -69,6 +69,7 @@ public class Game_Manager : MonoBehaviour
 
     void LevelComplete()
     {
+        Audio_Manager.instance.Play_Audio("victory");
         _finalMessage = "YOU WIN!!!";
         _isGameOver = true;
         _gamePlaying = false;
@@ -77,6 +78,7 @@ public class Game_Manager : MonoBehaviour
 
     void GameOver()
     {
+        Audio_Manager.instance.Play_Audio("game_over");
         _finalMessage = "TIME UP!";
         _isGameOver = true;
         _gamePlaying = false;

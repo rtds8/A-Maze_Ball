@@ -11,6 +11,7 @@ public class Countdown_Controller : MonoBehaviour
     void Start()
     {
         StartCoroutine(CountdownStart());
+        Audio_Manager.instance.Play_Audio("countdown");
     }
 
     IEnumerator CountdownStart()
